@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: ..
+      container_name: sgb-back-dev
+      dockerfile: docker/Dockerfile.dev # Ligamos el dockerfile personalizado para dev
+    ports:
+      - "3000:3000"  # Mapea el puerto del contenedor al de tu máquina

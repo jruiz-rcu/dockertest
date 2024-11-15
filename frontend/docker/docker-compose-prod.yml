@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: ..
+      container_name: sgb-front-prod
+      dockerfile: docker/Dockerfile # Ligamos el dockerfile personalizado para producción
+    ports:
+      - "5173:5173"  # Mapea el puerto del contenedor al de tu máquina

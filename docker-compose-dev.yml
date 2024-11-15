@@ -1,0 +1,21 @@
+name: sgi-dev
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile.dev # Ligamos el dockerfile personalizado para dev
+    ports:
+      - "5173:5173" # Mapea el puerto del contenedor al de tu máquina
+    volumes:
+      - ./frontend:/app # Mapea el código fuente para obtener los archivos fuente y reflejar cambios en tiempo real
+      - /app/node_modules #Descartamos la carpeta de node modules
+    environment:
+      CHOKIDAR_USEPOLLING: 'true' #Agregamos variable de entorno para detectar cambios en los archivos
+  backend:
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile.dev # Ligamos el dockerfile personalizado para dev
+    ports:
+      - "3000:3000" # Mapea el puerto del contenedor al de tu máquina
+    volumes:
+      - ./backend:/app # Mapea el código fuente para obtener los archivos fuente y reflejar cambios en tiempo real
