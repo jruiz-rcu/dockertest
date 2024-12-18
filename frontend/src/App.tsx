@@ -6,7 +6,7 @@ function App() {
 
   const fetch = async (): Promise<void> => {
     try {
-      const url = `${import.meta.env.VITE_BACKEND_URL}/Johnnnnnnnn`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/John`;
 
       const resp = await axios.get(url);
       

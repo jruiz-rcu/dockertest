@@ -12,6 +12,8 @@ app.get("/", (_: Request, res: Response) => {
 app.get("/:name", (req: Request, res: Response) => {
   const { name } = req.params;
 
+  console.log("Respuesta del backend");
+
   res.send({ message: `Hola ${name}!` });
 });
 
