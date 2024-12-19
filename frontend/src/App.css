@@ -1,0 +1,44 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  font-size: 1.5em;
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.saludo,
+.backendResponse,
+.game {
+  text-align: center;
+}
+
+button {
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+
+.number {
+  font-size: 3em;
+}
+
+.winner {
+  color: greenyellow;
+}
+
+.looser {
+  color: crimson;
+}
