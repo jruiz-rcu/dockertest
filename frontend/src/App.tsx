@@ -16,6 +16,7 @@ function App() {
   const VITE_BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT;
   const VITE_ENV_TYPE = import.meta.env.VITE_ENV_TYPE;
   const VITE_NAME = import.meta.env.VITE_NAME;
+  const VITE_MULTIPLO = import.meta.env.VITE_MULTIPLO;
 
   const fetch = async (): Promise<void> => {
     try {
@@ -29,7 +30,7 @@ function App() {
 
       setSaludo(message);
       setNumber(number);
-      const result = !Boolean(number % 3);
+      const result = !Boolean(number % VITE_MULTIPLO);
 
       const gameResult: GameResult = {
         className: result ? 'winner' : 'looser',
@@ -57,7 +58,7 @@ function App() {
         <p>{saludo}</p>
       </div>
       <div className="game">
-        <p><b>Si el número es multiplo de 3 ganas</b></p>
+        <p><b>Si el número es multiplo de {VITE_MULTIPLO} ganas</b></p>
         <div className="number">
           {number}
         </div>
