@@ -22,8 +22,6 @@ function App() {
     try {
       const url = `${VITE_BACKEND_URL}:${VITE_BACKEND_PORT}/${VITE_NAME}`;
 
-      console.log(`Haciendo llamada al backend: ${url}`);
-
       const resp = await axios.get(url);
 
       const { message, number } = resp.data;
@@ -50,7 +48,7 @@ function App() {
   return (
     <main>
       <div className="saludo">
-        <h1>¡Bienvenido!</h1>
+        <h1>Bienvenido</h1>
         <p>El frontend está en entorno de <b>{VITE_ENV_TYPE}</b> :)</p>
       </div>
       <div className="backendResponse">
