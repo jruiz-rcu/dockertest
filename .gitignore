@@ -1,8 +1,6 @@
-backend/node_modules
-frontend/node_modules
+*node_modules
+*dist
 
-backend/dist
-frontend/dist
-
+#Descartamos variables de entorno
 *.env.development
 *.env.production
