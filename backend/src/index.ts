@@ -20,7 +20,7 @@ app.get("/:name", (req: Request, res: Response) => {
   const randNum = Math.floor((Math.random() * MAX_NUM) + 1);
 
   console.log(`Se hizo una solicitud al backend, el número es: ${randNum}`);
-  res.send({ message: `¡Hola ${name}! Estas en el ambiente de ${ENV_TYPE} en el backend.`, number: randNum });
+  res.send({ message: `¡Hola ${name}! Estas en el ambiente de ${ENV_TYPE} en el backend`, number: randNum });
 });
 
 app.listen(BACKEND_PORT, () => console.log(`Escuchando en ${BACKEND_URL}:${BACKEND_PORT}`));
