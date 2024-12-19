@@ -4,5 +4,5 @@ frontend/node_modules
 backend/dist
 frontend/dist
 
-backend/.env*
-frontend/.env*
+*.env.development
+*.env.production
