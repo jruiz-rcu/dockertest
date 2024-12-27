@@ -1,4 +1,4 @@
-name: sgb-back-dev
+name: sgi_back_dev
 services:
   app:
     build:
@@ -8,3 +8,5 @@ services:
       - "3000:3000" # Mapea el puerto del contenedor al de tu máquina
     volumes:
       - ../:/app # Mapea el código fuente para obtener los archivos fuente y reflejar cambios en tiempo real
+    env_file:
+      - ../.env.development # Archivo con las variables de entorno

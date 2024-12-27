@@ -1,8 +1,10 @@
+name: sgi-backend-prod
 services:
   app:
     build:
       context: ..
-      container_name: sgb-back-dev
-      dockerfile: docker/Dockerfile.dev # Ligamos el dockerfile personalizado para dev
+      dockerfile: docker/Dockerfile.prod # Ligamos el dockerfile personalizado para producción
     ports:
-      - "3000:3000"  # Mapea el puerto del contenedor al de tu máquina
+      - "3000:3000" # Mapea el puerto del contenedor al de tu máquina
+    env_file:
+      - ../.env.production # Archivo con las variables de entorno

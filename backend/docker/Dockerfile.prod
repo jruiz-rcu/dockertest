@@ -1,22 +1,44 @@
-#Usamos la imagen de nodejs como base
-FROM node:20
+#El archivo de producción, nos permitirá en primera instanacia compilar el proyecto 
+#y posteriormente pasar solo el contenedor compilado al servidor para ahorrar recursos
+
+#Etapa 1: Construcción
+#Usamos la imagen de nodejs como base y lo llamamos temporalmente como builder
+#Utilizamos alpine para utilizar la menor cantidad de recursos posible
+FROM node:20-alpine AS builder
 
 #Creamos y seleccionamos el directorio donde trabajaremos
 WORKDIR /app
 
-#Copiamos los archivos de dependencias en el directorio
-#COPY package.json yarn.lock ./
+#Copiamos el archivo de dependencias
+COPY package.json yarn.lock ./ 
 
 #Instalamos las dependencias
-RUN yarn --frozen-lockfile
+RUN yarn
 
-#Copiamos la carpeta compilada en el directorio
-COPY ./dist ./
+#Copiamos el resto de archivos
+COPY . .
 
-#Exponemos el puerto donde va a correr la aplicación
-EXPOSE 3000
+#Creamos la carpeta de build
+#RUN yarn build
 
-#Compilamos el archivo
+CMD ["yarn", "dev"]
 
-#Iniciamos la aplicación
-CMD ["yarn", "start"]
+
+# #Etapa 2: Producción
+# #Ya creado el contenedor anterior lo copiamos al siguiente para las configuraciones finales
+# #Utilizamos la misma imagen
+# FROM node:20-alpine
+
+# #Creamos y seleccionamos el directorio donde trabajaremos
+# WORKDIR /app
+
+# #Copiamos solo los archivos necesarios para produccción (compilado y variables de entorno de producción)
+# COPY --from=builder /app/node_modules ./
+# COPY --from=builder /app/dist ./dist
+# COPY --from=builder /app/.env.production ./
+
+# #Nuevamente copiamos los paquetes
+# COPY package.json yarn.lock ./
+
+# #Iniciamos el proyecto
+# CMD ["yarn", "start"]

@@ -1,4 +1,4 @@
-name: sgb-front-dev
+name: SGI-FRONT-DEV
 services:
   app:
     build:
@@ -8,6 +8,6 @@ services:
       - "5173:5173" # Mapea el puerto del contenedor al de tu máquina
     volumes:
       - ../:/app # Mapea el código fuente para obtener los archivos fuente y reflejar cambios en tiempo real
-      - /app/node_modules
+      - /app/node_modules # No permitimos que pase los node modules porque se crearán dentro del contenedor
     environment:
       CHOKIDAR_USEPOLLING: 'true' #Agregamos variable de entorno para detectar cambios en los archivos
