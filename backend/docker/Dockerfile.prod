@@ -12,33 +12,28 @@ WORKDIR /app
 #Copiamos el archivo de dependencias
 COPY package.json yarn.lock ./ 
 
-#Instalamos las dependencias
-RUN yarn
+#Instalamos solo las dependencias necesarias para compilar
+RUN yarn install --production=false
 
 #Copiamos el resto de archivos
 COPY . .
 
 #Creamos la carpeta de build
-#RUN yarn build
-
-CMD ["yarn", "dev"]
+RUN yarn build
 
 
-# #Etapa 2: Producción
-# #Ya creado el contenedor anterior lo copiamos al siguiente para las configuraciones finales
-# #Utilizamos la misma imagen
-# FROM node:20-alpine
+#Etapa 2: Producción
+#Ya creado el contenedor anterior lo copiamos al siguiente para las configuraciones finales
+#Utilizamos la misma imagen
+FROM node:20-alpine
 
-# #Creamos y seleccionamos el directorio donde trabajaremos
-# WORKDIR /app
+#Creamos y seleccionamos el directorio donde trabajaremos
+WORKDIR /app
 
-# #Copiamos solo los archivos necesarios para produccción (compilado y variables de entorno de producción)
-# COPY --from=builder /app/node_modules ./
-# COPY --from=builder /app/dist ./dist
-# COPY --from=builder /app/.env.production ./
+#Copiamos solo los archivos necesarios para produccción (compilado y variables de entorno de producción)
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
 
-# #Nuevamente copiamos los paquetes
-# COPY package.json yarn.lock ./
-
-# #Iniciamos el proyecto
-# CMD ["yarn", "start"]
+#Iniciamos el proyecto
+CMD ["yarn", "start"]

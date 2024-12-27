@@ -14,7 +14,7 @@ app.get("/", (_: Request, res: Response) => {
   res.send({ message: `Bienvenido. Estás en el ambiente de ${ENV_TYPE}` });
 });
 
-app.get("/:name", (req: Request, res: Response) => {
+app.get("/api/game/:name", (req: Request, res: Response) => {
   const { name } = req.params;
 
   const randNum = Math.floor((Math.random() * MAX_NUM) + 1);
