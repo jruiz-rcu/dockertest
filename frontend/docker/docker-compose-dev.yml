@@ -1,13 +1,15 @@
-name: SGI-FRONT-DEV
+name: sgi_frontend_dev_test_1
 services:
   app:
     build:
       context: ..
       dockerfile: docker/Dockerfile.dev # Ligamos el dockerfile personalizado para dev
     ports:
-      - "5173:5173" # Mapea el puerto del contenedor al de tu máquina
+      - "5000:5000" # Mapea el puerto del contenedor al de tu máquina
     volumes:
       - ../:/app # Mapea el código fuente para obtener los archivos fuente y reflejar cambios en tiempo real
       - /app/node_modules # No permitimos que pase los node modules porque se crearán dentro del contenedor
+    env_file:
+      - ../.env.development
     environment:
       CHOKIDAR_USEPOLLING: 'true' #Agregamos variable de entorno para detectar cambios en los archivos

@@ -1,5 +1,5 @@
 #Usamos la imagen de nodejs como base
-FROM node:20
+FROM node:20-alpine AS builder
 
 #Creamos y seleccionamos el directorio donde trabajaremos
 WORKDIR /app
@@ -8,13 +8,18 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 #Instalamos las dependencias
-RUN yarn --frozen-lockfile
+RUN yarn install --production=false
 
 #Copiamos los demas archivos del proyecto
 COPY . .
 
-#Exponemos el puerto donde va a correr la aplicación
-EXPOSE 5173
-
 #Iniciamos la aplicación
-CMD ["yarn", "dev"]
+RUN yarn build
+
+EXPOSE 4173
+
+# Etapa 2: Producción
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -20,7 +20,9 @@ function App() {
 
   const fetch = async (): Promise<void> => {
     try {
-      const url = `${VITE_BACKEND_URL}:${VITE_BACKEND_PORT}/${VITE_NAME}`;
+      const url = `${VITE_BACKEND_URL}:${VITE_BACKEND_PORT}/api/game/${VITE_NAME}`;
+
+      console.log(`Llamando a ${url}`);
 
       const resp = await axios.get(url);
 

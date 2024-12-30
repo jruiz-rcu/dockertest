@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0', // Esto hace que Vite escuche en todas las interfaces de red
-    port: 5173, // Asegúrate de que el puerto coincida con el del Dockerfile
+    port: 5000, // Asegúrate de que el puerto coincida con el del Dockerfile
   },
 })
